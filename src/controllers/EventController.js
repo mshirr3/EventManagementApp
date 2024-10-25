@@ -9,53 +9,44 @@ export class EventController {
         this.eventViews = new EventsViews()
     }
 
-    showStartMenu() {
-        console.log(`
-            ===== Main Menu =====
-            1. Create a new event
-            2. Delete an existing event
-            3. Update an event
-            4. List all events
-            5. Return to start menu
-            6. Exit
-            =====================
-        `)        
-    }
-
     askForChoice() {
-      rl.question('Enter your choice: ', (choice) => {
-       this.handleStartMenuChoice(choice)
-      })
+        rl.question('Enter your choice: ', (choice) => {
+            this.handleStartMenuChoice(choice)
+        })
     }
 
     startMenu() {
-      this.showStartMenu()
-      this.askForChoice()
+        this.eventViews.showStartMenu()
+        this.askForChoice()
     }
 
     handleStartMenuChoice(choice) {
-        switch (choice) {
-            case '1':
-                this.createEvent()
-                // startMenu() or just restar app
-                break;
-            case '2':
-
-                break;
-            case '3':
-
-                break;
-            case '4':
-
-                break;
-            case '6':
-                console.log('Exiting...');
-                rl.close(); // Exit the application
-                break;
-            default:
-                console.log('Invalid choice, please try again.');
-                showMainMenu(); // Display the main menu again
-                break;
+        try {
+            switch (choice) {
+                case '1':
+                    this.createEvent()
+                    break;
+                case '2':
+                    // this.deleteEvent()
+                    break;
+                case '3':
+                    // this.updateEvent()
+                    break;
+                case '4':
+                    this.listAllEvents()
+                    break;
+                case '5':
+                    console.log('Exiting...');
+                    rl.close(); // Exit the application
+                    break;
+                default:
+                    console.log('Invalid choice, please try again.');
+                    showMainMenu(); // Display the main menu again
+                    break;
+            }
+        } catch (error) {
+            console.error('Error encountered: ' + error.message) 
+            this.startMenu()
         }
     }
 
@@ -68,8 +59,25 @@ export class EventController {
 
         const customDate = this.dateManager.getCustomDate(dateObj)
         customDate.createEvent(event)
-        
+
         console.log('Event successfully created')
         this.startMenu()
     }
+
+    listAllEvents() {
+        const allCustomDates = this.dateManager.getAllCustomDates()
+    
+        if (allCustomDates.length === 0) {
+            throw new Error('No events registered')
+        }
+
+        for (const customDate of allCustomDates) {
+            console.log('Events for: ' + customDate.getFormattedDate())
+            const events = customDate.getEvents()
+            this.eventViews.showAllEvents(events)
+        }
+
+        this.startMenu()
+    }
+
 }
