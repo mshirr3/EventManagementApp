@@ -27,7 +27,7 @@ export class EventController {
                     this.createEvent()
                     break;
                 case '2':
-                    // this.deleteEvent()
+                    this.deleteEvent()
                     break;
                 case '3':
                     // this.updateEvent()
@@ -63,6 +63,30 @@ export class EventController {
         console.log('Event successfully created')
         this.startMenu()
     }
+
+    async deleteEvent() {
+        const date = await this.eventViews.askDate()
+        const eventId = await this.eventViews.askId()
+
+        const customDate = this.dateManager.getCustomDate(date)
+        customDate.deleteEvent(eventId)
+
+        console.log('Event successfully deleted')
+        this.startMenu()
+    }
+
+    async deleteEvent() {
+        const date = await this.eventViews.askDate()
+        const eventId = await this.eventViews.askId()
+
+        const customDate = this.dateManager.getCustomDate(date)
+        customDate.updateEvent(eventId)
+
+        console.log('Event successfully updated')
+        this.startMenu()
+    }
+
+
 
     listAllEvents() {
         const allCustomDates = this.dateManager.getAllCustomDates()

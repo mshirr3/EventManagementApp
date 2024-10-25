@@ -30,11 +30,17 @@ export class EventsViews {
         });
     }
 
+    askId() {
+        return new Promise((resolve) => {
+            rl.question('Enter the id of the event: ', (id) => {
+                resolve(id)
+            });
+        });
+    }
+
     showAllEvents(events) {
        for (const event of events) {
          console.log(`${event.eventText}, id: ${event.id}`)
        }
     }
-
-
 }

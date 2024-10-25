@@ -30,9 +30,11 @@ Ett objekt när man tänker objekt-orienterad programmering har vissa bitar av d
 
 Att använda exceptions istället för att returnera något gör det mycket tydligare för utvecklaren att se hur fel hanteras i koden. Författaren nämner också att undvika för många try-catch block då det gör koden mindre läsbar. Jag upplever själv att try-catches kan ibland ta fokuset över själva logiken i funktionen. Istället är det bättre att ha try-catches i en högre nivå i abstraktionen och fånga alla fel där.
 
+![alt text](<Skärmbild (52).png>)
+
 ## Kapitel 8 - Boundaries
 
-I det här kapitelt nömner författaren hur viktigt det är att undvika externa beroenden då det kan orsaka problem i ens egna system om den externa parten ändras. Men det detta är i många fall svårt att följa men när man måste kan man se till att det externa biblioteket är regelbundet underhållen genom dess popularitet och nedladdningar. 
+I det här kapitelt nämner författaren hur viktigt det är att undvika externa beroenden då det kan orsaka problem i ens egna system om den externa parten ändras. Men det detta är i många fall svårt att följa men när man måste kan man se till att det externa biblioteket är regelbundet underhållen genom dess popularitet och nedladdningar. 
 
 ## Kapitel 9 . Unit Tests
 
@@ -42,6 +44,10 @@ Enhetstester är en oerhört viktig del under utveckligen av ett sustem. Att skr
 
 I detta kapitel skriver författaren om hur klasser bör designas och struktureras för att gör koden begriplig och lättare att underhålla. Det ska vara tydligt vad en klass gör och dens roll i systemet. För att uppnå det bör man hålla klasserna korta och se till att de inte har för många ansvar. Jag brukar inte tänka så mycket på inkapsling förut då jag inte tänkte på att någon annan skulle kunna använda mitt system. Men när jag tänkte så insåg jag hur viktigt det var med inkapsling då man inte vill att vem som helst ska kunna ändra och manipulera data i sin klass.
 
+![alt text](<Skärmbild (55).png>)
+
 ## Kapitel 11 - Systems
 
 Den här delen tycket jag är den svåraste att implementera. Att tänkte på systemet från ett helikopter-perspektiv och inte bara detaljer i enskilda klasser är ett måste för att utveckla kod av hög kvalitet. Att använda abstraktioner och gränssnitt i den högsta nivå av abstraktionen och sen neråt till detaljerna är ett bra sätt att strukturera enligt författaren men jag upplever det fortfarande lite krångligt.
+
+![alt text](<Skärmbild (53)-1.png>)
