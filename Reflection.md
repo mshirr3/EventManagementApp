@@ -14,7 +14,7 @@ Det viktigaste med funktioner är att den endast har en roll, alltså att den en
 
 I denna kapitel var författaren väldigt kritisk till kommentarer, och påstod i princip att kommentarer tyder på brist i koden. Det här var något helt nytt för mig men när man lägger mer fokus på att implementera principerna från de tidigare kapitlen inser man snabbt dess vinkel. I en funktion som updateEvent hade jag tidigare haft med en kommentat som "function that updates event" vilket är helt onödigt när namnet beskriver exakt samma sak. Men ibland kan det var bra för förtydligande. som in min sortDates kommentar där jag förklarar att den sorterar från tidigaste till senaste datumet. Det kan också vara bra med JSDOC för publika funktioner för att hjälpa användaren av den.
 
-![alt text](<Skärmbild (58).png>)
+![alt text](image-4.png)
 
 ## Kapitel 5 - Formating
 

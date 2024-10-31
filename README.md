@@ -15,6 +15,5 @@ and start the app:
 npm start
 ```
 
-## Bugs
-### Deleting events
-When deleting events 
+## Developing collaborations
+As seen when looking through the use cases of this application, many are not implemented. To collaborate, you could make a pull request.
