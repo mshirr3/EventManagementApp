@@ -1,23 +1,22 @@
 ### UC1. **Create Events**
 - **Description**: Users can create important events for specific dates
 - **Steps**:
-     - User selects a date and time for an event.
-     - System validates the date (ensuring the end date is after the start date).
-     - The event is saved and displayed.
-
-### UC2. **Delete Events**
-- **Description**: Users can delete events for specific dates
-- **Steps**:
-     - User selects event to delete at its specific date.
-     - System deletes the event
+     - User selects a date for an event.
+     - User submits the event.
+     - The event is created and saved.
 
 ### UC2. **Update Events and Date For Event**
 - **Description**: Users can update events and the date of event
 - **Steps**:
      - User selects event to update
-     - User inputs the update event and/or new date of event
+     - User inputs the updated event
      - System updates the event.
 
+### UC3. **Delete Events**
+- **Description**: Users can delete events for specific dates
+- **Steps**:
+     - User selects event to delete at its specific date.
+     - System deletes the event
 
 ### UC4. **Recurring Events**
    - **Description**: Users can schedule events to repeat (daily, weekly, monthly, etc.).

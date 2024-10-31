@@ -38,9 +38,17 @@ export class EventsViews {
         });
     }
 
+    askUpdatedEvent() {
+        return new Promise((resolve) => {
+            rl.question('Enter the updated event: ', (event) => {
+                resolve(event)
+            });
+        });
+    }
+
     showAllEvents(events) {
        for (const event of events) {
-         console.log(`${event.eventText}, id: ${event.id}`)
+         console.log(`Event: ${event.eventText}, id: ${event.id}`)
        }
     }
 }

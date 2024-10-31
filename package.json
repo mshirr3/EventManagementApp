@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/mshirr3/EventTrackingApp#readme",
   "dependencies": {
-    "date-managing": "^2.0.0",
+    "date-managing": "^2.5.0",
     "readline": "^1.3.0"
   }
 }

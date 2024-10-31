@@ -1,9 +1,10 @@
 import { EventsViews } from "./views/EventsViews.js";
 import { EventController } from "./controllers/EventController.js";
 
-const controller = new EventController()
+
 
 function main () {
+  const controller = new EventController()  
   controller.startMenu()
 }
 

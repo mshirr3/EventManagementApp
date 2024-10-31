@@ -3,10 +3,11 @@ import { rl } from '../views/ReadLineHelper.js'
 import { EventsViews } from '../views/EventsViews.js'
 
 export class EventController {
-
+    #dateManager
+    #eventViews
     constructor() {
-        this.dateManager = new DateManager()
-        this.eventViews = new EventsViews()
+        this.#dateManager = new DateManager()
+        this.#eventViews = new EventsViews()
     }
 
     askForChoice() {
@@ -16,7 +17,7 @@ export class EventController {
     }
 
     startMenu() {
-        this.eventViews.showStartMenu()
+        this.#eventViews.showStartMenu()
         this.askForChoice()
     }
 
@@ -25,82 +26,127 @@ export class EventController {
             switch (choice) {
                 case '1':
                     this.createEvent()
-                    break;
+                    break
                 case '2':
                     this.deleteEvent()
-                    break;
+                    break
                 case '3':
-                    // this.updateEvent()
-                    break;
+                    this.updateEvent()
+                    break
                 case '4':
                     this.listAllEvents()
-                    break;
+                    break
                 case '5':
-                    console.log('Exiting...');
-                    rl.close(); // Exit the application
-                    break;
+                    console.log('Exiting...')
+                    rl.close() // Exit the application
+                    break
                 default:
-                    console.log('Invalid choice, please try again.');
-                    showMainMenu(); // Display the main menu again
-                    break;
+                    console.log('Invalid choice, please try again.')
+                    this.startMenu()
+                    break
             }
         } catch (error) {
-            console.error('Error encountered: ' + error.message) 
+            console.error('Oops, ' + error.message)
             this.startMenu()
         }
     }
 
     async createEvent() {
-        const date = await this.eventViews.askDate()
-        const event = await this.eventViews.askEvent()
+        try {
+            const date = await this.#getDate()
+            const event = await this.#getEvent()
 
+            const customDate = this.#getOrCreateCustomDate(date)
+            customDate.createEvent(event)
+
+            this.startMenu()
+        } catch (error) {
+            console.error('Oops, ' + error.message)
+            this.startMenu()
+        }
+
+    }
+
+    async updateEvent() {
+        try {
+            const customDate = await this.#getCustomDate()
+            const eventId = await this.#getId()
+
+            const updatedEvent = await this.#eventViews.askUpdatedEvent()
+            customDate.updateEvent(eventId, updatedEvent)
+
+            this.startMenu()
+        } catch (error) {
+            console.error('Oops, ' + error.message)
+            this.startMenu()
+        }
+
+    }
+
+    async deleteEvent() {
+        try {
+            const customDate = await this.#getCustomDate()
+            const eventId = await this.#getId()
+
+            customDate.deleteEvent(eventId)
+
+            this.startMenu()
+        } catch (error) {
+            console.error('Oops, ' + error.message)
+            this.startMenu()
+        }
+
+    }
+
+    async #getDate() {
+        const date = await this.#eventViews.askDate()
         const dateObj = new Date(date)
-        this.dateManager.createCustomDate(dateObj)
-
-        const customDate = this.dateManager.getCustomDate(dateObj)
-        customDate.createEvent(event)
-
-        console.log('Event successfully created')
-        this.startMenu()
+        return dateObj
     }
 
-    async deleteEvent() {
-        const date = await this.eventViews.askDate()
-        const eventId = await this.eventViews.askId()
-
-        const customDate = this.dateManager.getCustomDate(date)
-        customDate.deleteEvent(eventId)
-
-        console.log('Event successfully deleted')
-        this.startMenu()
+    #getOrCreateCustomDate(date) {
+        if (this.#dateManager.isDateSaved(date)) {
+            return this.#dateManager.getCustomDate(date)
+        } else {
+            this.#createCustomDate(date)
+            return this.#dateManager.getCustomDate(date)
+        }
     }
 
-    async deleteEvent() {
-        const date = await this.eventViews.askDate()
-        const eventId = await this.eventViews.askId()
-
-        const customDate = this.dateManager.getCustomDate(date)
-        customDate.updateEvent(eventId)
-
-        console.log('Event successfully updated')
-        this.startMenu()
+    async #getEvent() {
+        const event = await this.#eventViews.askEvent()
+        return event
     }
 
+    async #getCustomDate() {
+        const dateObj = await this.#getDate()
+
+        const customDate = this.#dateManager.getCustomDate(dateObj)
+        return customDate
+    }
+
+    async #createCustomDate(date) {
+        this.#dateManager.createCustomDate(date)
+    }
+
+    async #getId() {
+        const eventId = await this.#eventViews.askId()
+        return eventId
+    }
 
 
     listAllEvents() {
-        const allCustomDates = this.dateManager.getAllCustomDates()
-    
-        if (allCustomDates.length === 0) {
-            throw new Error('No events registered')
-        }
+        if (this.#dateManager.customDateWithEventsExist()) {
+            const customDatesWithEvents = this.#dateManager.getCustomDatesWithEvents()
 
-        for (const customDate of allCustomDates) {
-            console.log('Events for: ' + customDate.getFormattedDate())
-            const events = customDate.getEvents()
-            this.eventViews.showAllEvents(events)
+            for (const customDate of customDatesWithEvents) {
+                console.log('Events for ' + customDate.getFormattedDate())
+                const events = customDate.getEvents()
+                this.#eventViews.showAllEvents(events)
+            }
+        } else {
+            throw new Error('No Events registered')
         }
-
         this.startMenu()
     }
 
