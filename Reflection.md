@@ -7,7 +7,7 @@ Att använda namn som beskriver vad funktionen, klassen eller vad som än namnge
 
 ## Kapitel 3 - Functions
 
-Det viktigaste med funktioner är att den endast har en roll, alltså att den endast gör en sak. Funktioner bör vara väl definierade, med namn som beskriver vad den gör. Command-query separation principen betonar att funktionen endast gör en sak, antingen gör någonting (som att ändra state på systemet) eller en query (returnera ett värde). Det här är definitivt en av de sakerna som jag inte tänkte på innan och jag upplever det mycket lättare att förstå och därmed underhålla koden.
+Det viktigaste med funktioner är att den endast har en roll, alltså att den endast gör en sak. (I Controllern har jag brytit mot den regeln då jag anropar startMenu i funktioner som hanterar events, detta pga en bugg i readline modulen där kompilatorn stannar och väntar på input så funktionen som anropar question funktionen redirecta på något sätt). Funktioner bör vara väl definierade, med namn som beskriver vad den gör. Command-query separation principen betonar att funktionen endast gör en sak, antingen gör någonting (som att ändra state på systemet) eller en query (returnera ett värde). Det här är definitivt en av de sakerna som jag inte tänkte på innan och jag upplever det mycket lättare att förstå och därmed underhålla koden.
 ![alt text](image-1.png)
 
 ## Kapitel 4 - Comments
